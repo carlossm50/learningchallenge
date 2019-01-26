@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">KidSmart</string>
+    <string name="app_name1">SmartKid</string>
+    <string name="app_name2">SmartChild</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="action_favorite">Favoritos</string>
+    <string name="desc">image</string>
+    <string name="volume_up">Volumen Up</string>
+    <string name="volume_off">Volumen Off</string>
+    <string name="refresh">Reiniciar</string>
+</resources>
