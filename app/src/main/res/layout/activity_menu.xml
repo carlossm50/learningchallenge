@@ -14,7 +14,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:background="#FAFAFA"
         android:elevation="10dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +24,7 @@
             android:id="@+id/imgfruit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent1"
+            android:background="@drawable/round_button"
             android:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +38,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginLeft="108dp"
         android:layout_marginTop="52dp"
-        android:background="#FAFAFA"
+
         android:elevation="10dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:background="@color/colorAccent1"
+            android:background="@drawable/round_button"
             android:elevation="5dp"
 
             app:srcCompat="@drawable/number2" />
@@ -64,7 +63,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:background="#FAFAFA"
+
         android:elevation="10dp"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/linear_fruit"
@@ -75,7 +74,7 @@
             android:id="@+id/geometric"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent1"
+            android:background="@drawable/round_button"
             android:elevation="5dp"
             app:srcCompat="@drawable/diamond" />
     </LinearLayout>

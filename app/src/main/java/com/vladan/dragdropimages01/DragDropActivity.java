@@ -17,8 +17,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.Random;
 
+import java.util.Locale;
+import java.util.Random;
+import android.speech.tts.TextToSpeech;
 public class DragDropActivity extends AppCompatActivity {
 
     public static final String TAG = "drag_drop";
@@ -33,6 +35,8 @@ public class DragDropActivity extends AppCompatActivity {
     int PunteroIMG = 1;
     int dragimg_id=0;
     int intAletorio=0;
+    String frunto= "";
+    TextToSpeech tts;
 
     ImageView img1,img2,img3,img4,img5,img6,img7,img8,img9,img10;
 
@@ -122,6 +126,26 @@ public class DragDropActivity extends AppCompatActivity {
                  //       .setAction("Action",null).show();
             }
         });
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i == TextToSpeech.SUCCESS){
+                    int result = tts.setLanguage(Locale.getDefault());
+                    if(result == TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("TTS","lenguaje no soportado");
+                    }
+                    else {
+
+                    }
+                }
+                else{
+                    Log.e("TTS","Inicializacion del lenguaje");
+                }
+
+            }
+
+        });
+
 
         puntaje = (TextView) findViewById(R.id.puntaje);
 
@@ -135,6 +159,7 @@ public class DragDropActivity extends AppCompatActivity {
         img8 = (ImageView) findViewById(R.id.imageView8);
         img9 = (ImageView) findViewById(R.id.imageView9);
         img10 = (ImageView) findViewById(R.id.imageView10);
+        img1.setTag(R.string.manzana);
 
 
         img1.setOnTouchListener(new ChoiceTouchListener());
@@ -172,6 +197,7 @@ public class DragDropActivity extends AppCompatActivity {
 
                                     @Override
                                     public void run() {
+                                        SpeackOut();//Agreagar al click de un Button
                                         dropZone.setImageResource(R.drawable.correct_green);
                                         intAletorio ++;
                                     }
@@ -213,48 +239,10 @@ public class DragDropActivity extends AppCompatActivity {
             }
         });
     }
-
-    public final class ChoiceTouchListener implements View.OnTouchListener{
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            ClipData data = ClipData.newPlainText("","");
-            View.DragShadowBuilder shadow = new View.DragShadowBuilder(view);
-            view.startDrag(data , shadow,null, 0);
-            Log.d(TAG,String.valueOf(view.getId()));
-
-            if (view.getId() == img1.getId()){
-                dragimg_id = R.drawable.apple;
-            }
-            if (view.getId() == img2.getId() ){
-                dragimg_id = R.drawable.bananas;
-            }
-            if (view.getId() == img3.getId() ){
-                dragimg_id = R.drawable.carrot;
-            }
-            if (view.getId() == img4.getId() ){
-                dragimg_id = R.drawable.cherries;
-            }
-            if (view.getId() == img5.getId() ){
-                dragimg_id = R.drawable.lemon;
-            }
-            if (view.getId() == img6.getId() ){
-                dragimg_id = R.drawable.grapes;
-            }
-            if (view.getId() == img7.getId() ){
-                dragimg_id = R.drawable.pear;
-            }
-            if (view.getId() == img8.getId() ){
-                dragimg_id = R.drawable.strawberry;
-            }
-            if ( view.getId() == img9.getId() ){
-                dragimg_id = R.drawable.tomato;
-            }
-            if (view.getId() == img10.getId() ){
-                dragimg_id = R.drawable.watermelon;
-            }
-
-            return false;
-        }
+    //Reproduse el sonido de las frutas
+    private void  SpeackOut(){
+        String text = frunto;
+        tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
     }
 
     //procedimiento que inicializa las varialbles de sonida y dispara el sonido de backGround
@@ -460,6 +448,58 @@ public class DragDropActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... voids) {
                 back_sund.start();
             return true;
+        }
+    }
+    public final class ChoiceTouchListener implements View.OnTouchListener{
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            ClipData data = ClipData.newPlainText("","");
+            View.DragShadowBuilder shadow = new View.DragShadowBuilder(view);
+            view.startDrag(data , shadow,null, 0);
+            Log.d(TAG,String.valueOf(view.getId()));
+
+            if (view.getId() == img1.getId()){
+                dragimg_id = R.drawable.apple;
+                frunto = getString(R.string.manzana);
+            }
+            if (view.getId() == img2.getId() ){
+                dragimg_id = R.drawable.bananas;
+                frunto = getString(R.string.platano);
+            }
+            if (view.getId() == img3.getId() ){
+                dragimg_id = R.drawable.carrot;
+                frunto = getString(R.string.zanahoria);
+            }
+            if (view.getId() == img4.getId() ){
+                dragimg_id = R.drawable.cherries;
+                frunto = getString(R.string.cereza);
+            }
+            if (view.getId() == img5.getId() ){
+                dragimg_id = R.drawable.lemon;
+                frunto = getString(R.string.limon);
+            }
+            if (view.getId() == img6.getId() ){
+                dragimg_id = R.drawable.grapes;
+                frunto = getString(R.string.uva);
+            }
+            if (view.getId() == img7.getId() ){
+                dragimg_id = R.drawable.pear;
+                frunto = getString(R.string.pera);
+            }
+            if (view.getId() == img8.getId() ){
+                dragimg_id = R.drawable.strawberry;
+                frunto = getString(R.string.fresa);
+            }
+            if ( view.getId() == img9.getId() ){
+                dragimg_id = R.drawable.tomato;
+                frunto = getString(R.string.tomate);
+            }
+            if (view.getId() == img10.getId() ){
+                dragimg_id = R.drawable.watermelon;
+                frunto = getString(R.string.sandia);
+            }
+
+            return false;
         }
     }
 

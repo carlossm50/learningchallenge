@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KidSmart</string>
+    <string name="app_name1">SmartKid</string>
+    <string name="app_name2">SmartChild</string>
+    <string name="action_settings">Configurations</string>
+    <string name="action_favorite">Favorites</string>
+    <string name="desc">Image</string>
+    <string name="volume_up">Sound On</string>
+    <string name="volume_off">Sound Off</string>
+    <string name="refresh">Reset</string>
+    <string name="manzana">Apple</string>
+    <string name="platano">Banana</string>
+    <string name="cereza">Cherry</string>
+    <string name="zanahoria">Carrot</string>
+    <string name="limon">Lemon</string>
+    <string name="uva">Grape</string>
+    <string name="pera">Pear</string>
+    <string name="fresa">Strawberry</string>
+    <string name="tomate">Tomato</string>
+    <string name="sandia">Watermelon</string>
+</resources>

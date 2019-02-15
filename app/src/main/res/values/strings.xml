@@ -5,7 +5,17 @@
     <string name="action_settings">Configuraciones</string>
     <string name="action_favorite">Favoritos</string>
     <string name="desc">image</string>
-    <string name="volume_up">Volumen Up</string>
-    <string name="volume_off">Volumen Off</string>
+    <string name="volume_up">Apagar </string>
+    <string name="volume_off">Encender</string>
     <string name="refresh">Reiniciar</string>
+    <string name="manzana">Manzana</string>
+    <string name="platano">Plátano</string>
+    <string name="cereza">Cereza</string>
+    <string name="zanahoria">Zanahoria</string>
+    <string name="limon">Limón</string>
+    <string name="uva">Uva</string>
+    <string name="pera">Pera</string>
+    <string name="fresa">Fresa</string>
+    <string name="tomate">Tomate</string>
+    <string name="sandia">Sandía</string>
 </resources>
