@@ -28,13 +28,11 @@ TextToSpeech tts;
                         Log.e("TTS","lenguaje no soportado");
                     }
                     else {
-                       //  SpeackOut();//Agreagar al click de un Button
                     }
                 }
                 else{
                     Log.e("TTS","Inicializacion del lenguaje");
                 }
-
             }
             private void  SpeackOut(){
                 String text = "Joder tio";
@@ -49,6 +47,7 @@ TextToSpeech tts;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),DragDropActivity.class);
+                intent.putExtra("opcion","1");
                 startActivity(intent);
 
             }
@@ -56,14 +55,16 @@ TextToSpeech tts;
         imgnumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),NumberChallenge.class);
+                Intent intent = new Intent(view.getContext(),DragDropActivity.class);
+                intent.putExtra("opcion","2");
                 startActivity(intent);
             }
         });
         geometric.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),GeometricActivity.class);
+                Intent intent = new Intent(view.getContext(),DragDropActivity.class);
+                intent.putExtra("opcion","3");
                 startActivity(intent);
             }
         });

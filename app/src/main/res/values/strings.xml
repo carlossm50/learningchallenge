@@ -18,4 +18,24 @@
     <string name="fresa">Fresa</string>
     <string name="tomate">Tomate</string>
     <string name="sandia">Sandía</string>
+    <string name="uno">Uno</string>
+    <string name="dos">Dos</string>
+    <string name="tres">Tres</string>
+    <string name="cuatro">Cuatro</string>
+    <string name="cinco">Cinco</string>
+    <string name="seis">Seis</string>
+    <string name="siete">Siete</string>
+    <string name="ocho">Ocho</string>
+    <string name="nueve">Nuevo</string>
+    <string name="dies">Dies</string>
+    <string name="circulo">Circulo</string>
+    <string name="diamante">Diamante</string>
+    <string name="hexagono">Hexágono</string>
+    <string name="pentegono">Pentagono</string>
+    <string name="rectangulo">Rectángulo</string>
+    <string name="ovalo">Óvalo</string>
+    <string name="cuadrado">Cuadrado</string>
+    <string name="triangulo">Triángulo</string>
+    <string name="estrella">Estrella</string>
+    <string name="corazon">Corazón</string>
 </resources>

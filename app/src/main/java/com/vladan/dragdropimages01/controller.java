@@ -4,18 +4,18 @@ public class controller {
     public int[] IDItems = new int[10];
     public int[] IDItems_bg = new int[10];
     public int[] IDSounds = new int[10];
-    public controller(int i){
+    public controller(String i){
 
         switch (i) {
-            case 1: {
+            case "1": {
                 llenafrutas();
                 break;
             }
-            case 2: {
+            case "2": {
                 llenanumeros();
                 break;
             }
-            case 3: {
+            case "3": {
                 llenafiguras();
                 break;
             }
@@ -80,16 +80,16 @@ public class controller {
         IDItems_bg[8] = R.drawable.number9_bg;
         IDItems_bg[9] = R.drawable.number10_bg;
 
-        /*IDSounds[0] = R.string.manzana;
-        IDSounds[1] = R.string.platano;
-        IDSounds[2] = R.string.zanahoria;
-        IDSounds[3] = R.string.cereza;
-        IDSounds[4] = R.string.uva;
-        IDSounds[5] = R.string.limon;
-        IDSounds[6] = R.string.pera;
-        IDSounds[7] = R.string.fresa;
-        IDSounds[8] = R.string.tomate;
-        IDSounds[9] = R.string.sandia;*/
+        IDSounds[0] = R.string.uno;
+        IDSounds[1] = R.string.dos;
+        IDSounds[2] = R.string.tres;
+        IDSounds[3] = R.string.cuatro;
+        IDSounds[4] = R.string.cinco;
+        IDSounds[5] = R.string.seis;
+        IDSounds[6] = R.string.siete;
+        IDSounds[7] = R.string.ocho;
+        IDSounds[8] = R.string.nueve;
+        IDSounds[9] = R.string.dies;
     }
     public void llenafiguras(){
         IDItems[0] = R.drawable.circle;
@@ -114,15 +114,15 @@ public class controller {
         IDItems_bg[8] = R.drawable.star_bg;
         IDItems_bg[9] = R.drawable.heart_bg;
 
-        /*IDSounds[0] = R.string.manzana;
-        IDSounds[1] = R.string.platano;
-        IDSounds[2] = R.string.zanahoria;
-        IDSounds[3] = R.string.cereza;
-        IDSounds[4] = R.string.uva;
-        IDSounds[5] = R.string.limon;
-        IDSounds[6] = R.string.pera;
-        IDSounds[7] = R.string.fresa;
-        IDSounds[8] = R.string.tomate;
-        IDSounds[9] = R.string.sandia;*/
+        IDSounds[0] = R.string.circulo;
+        IDSounds[1] = R.string.diamante;
+        IDSounds[2] = R.string.hexagono;
+        IDSounds[3] = R.string.pentegono;
+        IDSounds[4] = R.string.rectangulo;
+        IDSounds[5] = R.string.ovalo;
+        IDSounds[6] = R.string.cuadrado;
+        IDSounds[7] = R.string.triangulo;
+        IDSounds[8] = R.string.estrella;
+        IDSounds[9] = R.string.corazon;
     }
 }

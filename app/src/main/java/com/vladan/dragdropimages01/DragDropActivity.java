@@ -1,6 +1,7 @@
 package com.vladan.dragdropimages01;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,10 +38,9 @@ public class DragDropActivity extends AppCompatActivity {
     int intAletorio = 0;
     String frunto = "";
     TextToSpeech tts;
-    public int opcion = 0;
-    controller itemes = new controller(1);
-    
-
+    Bundle opcion ;
+    String op ;
+    controller itemes;
 
     ImageView img1,img2,img3,img4,img5,img6,img7,img8,img9,img10;
 
@@ -130,7 +130,9 @@ public class DragDropActivity extends AppCompatActivity {
                  //       .setAction("Action",null).show();
             }
         });
-
+         opcion = getIntent().getExtras();
+         op = opcion.getString("opcion");
+         itemes = new controller(op);
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -140,13 +142,11 @@ public class DragDropActivity extends AppCompatActivity {
                         Log.e("TTS","lenguaje no soportado");
                     }
                     else {
-
                     }
                 }
                 else{
                     Log.e("TTS","Inicializacion del lenguaje");
                 }
-
             }
 
         });
