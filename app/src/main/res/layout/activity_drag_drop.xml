@@ -92,20 +92,38 @@
     <TextView
         android:id="@+id/puntaje"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/my_toolbar"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="189dp"
+        android:layout_marginRight="189dp"
+        android:layout_marginBottom="-4dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#dd9d14"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/puntajeincorrecto"
+        android:layout_width="wrap_content"
         android:layout_height="31dp"
 
         android:layout_below="@+id/my_toolbar"
         android:layout_alignBottom="@+id/imageView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginRight="116dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="106dp"
+        android:layout_marginRight="106dp"
         android:layout_marginBottom="-4dp"
         android:text="0"
         android:textAlignment="center"
         android:textColor="#dd9d14"
-        android:textSize="25dp" />
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -114,10 +132,22 @@
         android:layout_below="@+id/my_toolbar"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginRight="172dp"
-        app:srcCompat="@drawable/start_gift" />
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginRight="212dp"
+        app:srcCompat="@drawable/correcto_simbolo" />
+
+    <ImageView
+        android:id="@+id/incorecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        app:srcCompat="@drawable/incorrecto_simbolo" />
 
     <LinearLayout
         android:id="@+id/panel1"

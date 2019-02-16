@@ -98,9 +98,27 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginRight="116dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginRight="160dp"
         android:layout_marginBottom="-4dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#dd9d14"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/puntajeincorrecto"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+
+        android:layout_below="@+id/my_toolbar"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginBottom="-1dp"
         android:text="0"
         android:textAlignment="center"
         android:textColor="#dd9d14"
@@ -114,9 +132,21 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="33dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginRight="172dp"
-        app:srcCompat="@drawable/start_gift" />
+        android:layout_marginEnd="216dp"
+        android:layout_marginRight="216dp"
+        app:srcCompat="@drawable/correcto_simbolo" />
+
+    <ImageView
+        android:id="@+id/incorecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginRight="94dp"
+        app:srcCompat="@drawable/incorrecto_simbolo" />
 
     <LinearLayout
         android:id="@+id/panel1"
@@ -161,9 +191,5 @@
             android:layout_width="68dp"
             android:layout_height="68dp"
             app:srcCompat="@drawable/rectangle" />
-
-
     </LinearLayout>
-
-
 </RelativeLayout>

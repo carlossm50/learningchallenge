@@ -28,8 +28,8 @@ public class DragDropActivity extends AppCompatActivity {
     ImageView dropZone;
     int[] imageId = new int[10];
     int[] imageId_bg = new int[10];
-    int dropZone_imgID, drop_imgID,puntaje_int = 0;
-    TextView puntaje;
+    int dropZone_imgID, drop_imgID,puntaje_int = 0,puntaje_incorecto = 0;
+    TextView puntaje,puntajeincorrecto;
     MediaPlayer img_correct,img_change, back_sund,end_sound;
     playbackground bgsond;
     Handler mhandler = new Handler();
@@ -152,6 +152,7 @@ public class DragDropActivity extends AppCompatActivity {
         });
 
         puntaje = (TextView) findViewById(R.id.puntaje);
+        puntajeincorrecto = (TextView) findViewById(R.id.puntajeincorrecto);
 
         img1 = (ImageView) findViewById(R.id.imageView1);
         img2 = (ImageView) findViewById(R.id.imageView2);
@@ -192,7 +193,7 @@ public class DragDropActivity extends AppCompatActivity {
                         {
                             if (PunteroIMG <= 10) {
                                 dropZone.setImageResource(dragimg_id);
-                                puntaje_int = puntaje_int + 100;
+                                puntaje_int = puntaje_int + 1;
                                 puntaje.setText(String.valueOf(puntaje_int));
                                 //img_correct.start();
 
@@ -225,12 +226,22 @@ public class DragDropActivity extends AppCompatActivity {
                         else {
                             if (PunteroIMG <= 10) {
                                 dropZone.setImageResource(R.drawable.wrong_red);
+                                puntaje_incorecto = puntaje_incorecto + 1;
+                                puntajeincorrecto.setText(String.valueOf(puntaje_incorecto));
                                 mhandler.postDelayed(new Runnable() {
                                     //int x = 0;
 
                                     @Override
                                     public void run() {
                                         dropZone.setImageResource(imageId_bg[intAletorio]);
+                                        PunteroIMG++;
+                                        intAletorio ++;
+                                        if (PunteroIMG <= 10){
+                                            nextimg();
+                                        }
+                                        else {
+                                            end_sounds();
+                                        }
                                     }
                                 }, 500);
 
@@ -445,8 +456,10 @@ public class DragDropActivity extends AppCompatActivity {
         dragimg_id=0;
         intAletorio=0;
         puntaje_int = 0;
+        puntaje_incorecto = 0;
         back_sund.stop();
         puntaje.setText(String.valueOf(puntaje_int));
+        puntajeincorrecto.setText(String.valueOf(puntaje_incorecto));
         llenararreglo();
         nextimg();
         begin_sounds();
