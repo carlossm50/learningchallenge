@@ -33,10 +33,14 @@ public class DragDropActivity extends AppCompatActivity {
     playbackground bgsond;
     Handler mhandler = new Handler();
     int PunteroIMG = 1;
-    int dragimg_id=0;
-    int intAletorio=0;
-    String frunto= "";
+    int dragimg_id = 0;
+    int intAletorio = 0;
+    String frunto = "";
     TextToSpeech tts;
+    public int opcion = 0;
+    controller itemes = new controller(1);
+    
+
 
     ImageView img1,img2,img3,img4,img5,img6,img7,img8,img9,img10;
 
@@ -126,6 +130,7 @@ public class DragDropActivity extends AppCompatActivity {
                  //       .setAction("Action",null).show();
             }
         });
+
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -146,7 +151,6 @@ public class DragDropActivity extends AppCompatActivity {
 
         });
 
-
         puntaje = (TextView) findViewById(R.id.puntaje);
 
         img1 = (ImageView) findViewById(R.id.imageView1);
@@ -159,7 +163,7 @@ public class DragDropActivity extends AppCompatActivity {
         img8 = (ImageView) findViewById(R.id.imageView8);
         img9 = (ImageView) findViewById(R.id.imageView9);
         img10 = (ImageView) findViewById(R.id.imageView10);
-        img1.setTag(R.string.manzana);
+
 
 
         img1.setOnTouchListener(new ChoiceTouchListener());
@@ -172,7 +176,7 @@ public class DragDropActivity extends AppCompatActivity {
         img8.setOnTouchListener(new ChoiceTouchListener());
         img9.setOnTouchListener(new ChoiceTouchListener());
         img10.setOnTouchListener(new ChoiceTouchListener());
-
+        llenarimagenes();//LLena los componentes imageview con las imagenes correspondientes
         llenararreglo();//Llena el el arreglo de imagenes en diferente orden.
 
         dropZone = (ImageView) findViewById(R.id.drop);
@@ -190,7 +194,7 @@ public class DragDropActivity extends AppCompatActivity {
                                 dropZone.setImageResource(dragimg_id);
                                 puntaje_int = puntaje_int + 100;
                                 puntaje.setText(String.valueOf(puntaje_int));
-                                img_correct.start();
+                                //img_correct.start();
 
                                 mhandler.postDelayed(new Runnable() {
                                    // int x = 0;
@@ -262,161 +266,173 @@ public class DragDropActivity extends AppCompatActivity {
         back_sund.stop();
         end_sound.start();
     }
+
     // Genera la proxima imagen a seleccionar
     public void nextimg(){
-        //Random aleatorio = new Random(System.currentTimeMillis());
-        // Producir nuevo int aleatorio entre 0 y 9
-        //intAletorio = aleatorio.nextInt(5);
         dropZone.setImageResource(imageId_bg[intAletorio]);
         dropZone_imgID = imageId_bg[intAletorio];
         drop_imgID = imageId[intAletorio];
+    }
+    public void llenarimagenes(){
+        img1.setImageResource(itemes.IDItems[0]);
+        img2.setImageResource(itemes.IDItems[1]);
+        img3.setImageResource(itemes.IDItems[2]);
+        img4.setImageResource(itemes.IDItems[3]);
+        img5.setImageResource(itemes.IDItems[4]);
+        img6.setImageResource(itemes.IDItems[5]);
+        img7.setImageResource(itemes.IDItems[6]);
+        img8.setImageResource(itemes.IDItems[7]);
+        img9.setImageResource(itemes.IDItems[8]);
+        img10.setImageResource(itemes.IDItems[9]);
+
+
     }
     public void llenararreglo(){
         Random aleatorio = new Random(System.currentTimeMillis());
         switch (aleatorio.nextInt(5)){
             case (0):{
-                imageId[0] = R.drawable.apple;
-                imageId[1] = R.drawable.bananas;
-                imageId[2] = R.drawable.carrot;
-                imageId[3] = R.drawable.cherries;
-                imageId[4] = R.drawable.grapes;
-                imageId[5] = R.drawable.lemon;
-                imageId[6] = R.drawable.pear;
-                imageId[7] = R.drawable.strawberry;
-                imageId[8] = R.drawable.tomato;
-                imageId[9] = R.drawable.watermelon;
+                imageId[0] = itemes.IDItems[0];
+                imageId[1] = itemes.IDItems[1];
+                imageId[2] = itemes.IDItems[2];
+                imageId[3] = itemes.IDItems[3];
+                imageId[4] = itemes.IDItems[4];
+                imageId[5] = itemes.IDItems[5];
+                imageId[6] = itemes.IDItems[6];
+                imageId[7] = itemes.IDItems[7];
+                imageId[8] = itemes.IDItems[8];
+                imageId[9] = itemes.IDItems[9];
 
-                imageId_bg[0] = R.drawable.apple_bg;
-                imageId_bg[1] = R.drawable.bananas_bg;
-                imageId_bg[2] = R.drawable.carrot_bg;
-                imageId_bg[3] = R.drawable.cherries_bg;
-                imageId_bg[4] = R.drawable.grapes_bg;
-                imageId_bg[5] = R.drawable.lemon_bg;
-                imageId_bg[6] = R.drawable.pear_bg;
-                imageId_bg[7] = R.drawable.strawberry_bg;
-                imageId_bg[8] = R.drawable.tomato_bg;
-                imageId_bg[9] = R.drawable.watermelon_bg;
+                imageId_bg[0] = itemes.IDItems_bg[0];
+                imageId_bg[1] = itemes.IDItems_bg[1];
+                imageId_bg[2] = itemes.IDItems_bg[2];
+                imageId_bg[3] = itemes.IDItems_bg[3];
+                imageId_bg[4] = itemes.IDItems_bg[4];
+                imageId_bg[5] = itemes.IDItems_bg[5];
+                imageId_bg[6] = itemes.IDItems_bg[6];
+                imageId_bg[7] = itemes.IDItems_bg[7];
+                imageId_bg[8] = itemes.IDItems_bg[8];
+                imageId_bg[9] = itemes.IDItems_bg[9];
 
                 break;
             }
             case (1):{
-                imageId[4] = R.drawable.apple;
-                imageId[8] = R.drawable.bananas;
-                imageId[2] = R.drawable.carrot;
-                imageId[6] = R.drawable.cherries;
-                imageId[0] = R.drawable.grapes;
-                imageId[1] = R.drawable.lemon;
-                imageId[5] = R.drawable.pear;
-                imageId[9] = R.drawable.strawberry;
-                imageId[3] = R.drawable.tomato;
-                imageId[7] = R.drawable.watermelon;
+                imageId[4] = itemes.IDItems[0];
+                imageId[8] = itemes.IDItems[1];
+                imageId[2] = itemes.IDItems[2];
+                imageId[6] = itemes.IDItems[3];
+                imageId[0] = itemes.IDItems[4];
+                imageId[1] = itemes.IDItems[5];
+                imageId[5] = itemes.IDItems[6];
+                imageId[9] = itemes.IDItems[7];
+                imageId[3] = itemes.IDItems[8];
+                imageId[7] = itemes.IDItems[9];
 
-                imageId_bg[4] = R.drawable.apple_bg;
-                imageId_bg[8] = R.drawable.bananas_bg;
-                imageId_bg[2] = R.drawable.carrot_bg;
-                imageId_bg[6] = R.drawable.cherries_bg;
-                imageId_bg[0] = R.drawable.grapes_bg;
-                imageId_bg[1] = R.drawable.lemon_bg;
-                imageId_bg[5] = R.drawable.pear_bg;
-                imageId_bg[9] = R.drawable.strawberry_bg;
-                imageId_bg[3] = R.drawable.tomato_bg;
-                imageId_bg[7] = R.drawable.watermelon_bg;
+                imageId_bg[4] = itemes.IDItems_bg[0];
+                imageId_bg[8] = itemes.IDItems_bg[1];
+                imageId_bg[2] = itemes.IDItems_bg[2];
+                imageId_bg[6] = itemes.IDItems_bg[3];
+                imageId_bg[0] = itemes.IDItems_bg[4];
+                imageId_bg[1] = itemes.IDItems_bg[5];
+                imageId_bg[5] = itemes.IDItems_bg[6];
+                imageId_bg[9] = itemes.IDItems_bg[7];
+                imageId_bg[3] = itemes.IDItems_bg[8];
+                imageId_bg[7] = itemes.IDItems_bg[9];
                 break;
             }
             case (2):{
-                imageId[9] = R.drawable.apple;
-                imageId[8] = R.drawable.bananas;
-                imageId[7] = R.drawable.carrot;
-                imageId[6] = R.drawable.cherries;
-                imageId[5] = R.drawable.grapes;
-                imageId[4] = R.drawable.lemon;
-                imageId[3] = R.drawable.pear;
-                imageId[2] = R.drawable.strawberry;
-                imageId[1] = R.drawable.tomato;
-                imageId[0] = R.drawable.watermelon;
+                imageId[9] = itemes.IDItems[0];
+                imageId[8] = itemes.IDItems[1];
+                imageId[7] = itemes.IDItems[2];
+                imageId[6] = itemes.IDItems[3];
+                imageId[5] = itemes.IDItems[4];
+                imageId[4] = itemes.IDItems[5];
+                imageId[3] = itemes.IDItems[6];
+                imageId[2] = itemes.IDItems[7];
+                imageId[1] = itemes.IDItems[8];
+                imageId[0] = itemes.IDItems[9];
 
-                imageId_bg[9] = R.drawable.apple_bg;
-                imageId_bg[8] = R.drawable.bananas_bg;
-                imageId_bg[7] = R.drawable.carrot_bg;
-                imageId_bg[6] = R.drawable.cherries_bg;
-                imageId_bg[5] = R.drawable.grapes_bg;
-                imageId_bg[4] = R.drawable.lemon_bg;
-                imageId_bg[3] = R.drawable.pear_bg;
-                imageId_bg[2] = R.drawable.strawberry_bg;
-                imageId_bg[1] = R.drawable.tomato_bg;
-                imageId_bg[0] = R.drawable.watermelon_bg;
+                imageId_bg[9] = itemes.IDItems_bg[0];
+                imageId_bg[8] = itemes.IDItems_bg[1];
+                imageId_bg[7] = itemes.IDItems_bg[2];
+                imageId_bg[6] = itemes.IDItems_bg[3];
+                imageId_bg[5] = itemes.IDItems_bg[4];
+                imageId_bg[4] = itemes.IDItems_bg[5];
+                imageId_bg[3] = itemes.IDItems_bg[6];
+                imageId_bg[2] = itemes.IDItems_bg[7];
+                imageId_bg[1] = itemes.IDItems_bg[8];
+                imageId_bg[0] = itemes.IDItems_bg[9];
                 break;
             }
             case (3):{
-                imageId[2] = R.drawable.apple;
-                imageId[4] = R.drawable.bananas;
-                imageId[6] = R.drawable.carrot;
-                imageId[8] = R.drawable.cherries;
-                imageId[0] = R.drawable.grapes;
-                imageId[3] = R.drawable.lemon;
-                imageId[5] = R.drawable.pear;
-                imageId[7] = R.drawable.strawberry;
-                imageId[9] = R.drawable.tomato;
-                imageId[1] = R.drawable.watermelon;
+                imageId[2] = itemes.IDItems[0];
+                imageId[4] = itemes.IDItems[1];
+                imageId[6] = itemes.IDItems[2];
+                imageId[8] = itemes.IDItems[3];
+                imageId[0] = itemes.IDItems[4];
+                imageId[3] = itemes.IDItems[5];
+                imageId[5] = itemes.IDItems[6];
+                imageId[7] = itemes.IDItems[7];
+                imageId[9] = itemes.IDItems[8];
+                imageId[1] = itemes.IDItems[9];
 
-                imageId_bg[2] = R.drawable.apple_bg;
-                imageId_bg[4] = R.drawable.bananas_bg;
-                imageId_bg[6] = R.drawable.carrot_bg;
-                imageId_bg[8] = R.drawable.cherries_bg;
-                imageId_bg[0] = R.drawable.grapes_bg;
-                imageId_bg[3] = R.drawable.lemon_bg;
-                imageId_bg[5] = R.drawable.pear_bg;
-                imageId_bg[7] = R.drawable.strawberry_bg;
-                imageId_bg[9] = R.drawable.tomato_bg;
-                imageId_bg[1] = R.drawable.watermelon_bg;
+                imageId_bg[2] = itemes.IDItems_bg[0];
+                imageId_bg[4] = itemes.IDItems_bg[1];
+                imageId_bg[6] = itemes.IDItems_bg[2];
+                imageId_bg[8] = itemes.IDItems_bg[3];
+                imageId_bg[0] = itemes.IDItems_bg[4];
+                imageId_bg[3] = itemes.IDItems_bg[5];
+                imageId_bg[5] = itemes.IDItems_bg[6];
+                imageId_bg[7] = itemes.IDItems_bg[7];
+                imageId_bg[9] = itemes.IDItems_bg[8];
+                imageId_bg[1] = itemes.IDItems_bg[9];
                 break;
             }
             case (4):{
-                imageId[3] = R.drawable.apple;
-                imageId[6] = R.drawable.bananas;
-                imageId[9] = R.drawable.carrot;
-                imageId[2] = R.drawable.cherries;
-                imageId[5] = R.drawable.grapes;
-                imageId[8] = R.drawable.lemon;
-                imageId[1] = R.drawable.pear;
-                imageId[4] = R.drawable.strawberry;
-                imageId[7] = R.drawable.tomato;
-                imageId[0] = R.drawable.watermelon;
+                imageId[3] = itemes.IDItems[0];
+                imageId[6] = itemes.IDItems[1];
+                imageId[9] = itemes.IDItems[2];
+                imageId[2] = itemes.IDItems[3];
+                imageId[5] = itemes.IDItems[4];
+                imageId[8] = itemes.IDItems[5];
+                imageId[1] = itemes.IDItems[6];
+                imageId[4] = itemes.IDItems[7];
+                imageId[7] = itemes.IDItems[8];
+                imageId[0] = itemes.IDItems[9];
 
-                imageId_bg[3] = R.drawable.apple_bg;
-                imageId_bg[6] = R.drawable.bananas_bg;
-                imageId_bg[9] = R.drawable.carrot_bg;
-                imageId_bg[2] = R.drawable.cherries_bg;
-                imageId_bg[5] = R.drawable.grapes_bg;
-                imageId_bg[8] = R.drawable.lemon_bg;
-                imageId_bg[1] = R.drawable.pear_bg;
-                imageId_bg[4] = R.drawable.strawberry_bg;
-                imageId_bg[7] = R.drawable.tomato_bg;
-                imageId_bg[0] = R.drawable.watermelon_bg;
+                imageId_bg[3] = itemes.IDItems_bg[0];
+                imageId_bg[6] = itemes.IDItems_bg[1];
+                imageId_bg[9] = itemes.IDItems_bg[2];
+                imageId_bg[2] = itemes.IDItems_bg[3];
+                imageId_bg[5] = itemes.IDItems_bg[4];
+                imageId_bg[8] = itemes.IDItems_bg[5];
+                imageId_bg[1] = itemes.IDItems_bg[6];
+                imageId_bg[4] = itemes.IDItems_bg[7];
+                imageId_bg[7] = itemes.IDItems_bg[8];
+                imageId_bg[0] = itemes.IDItems_bg[9];
                 break;
             }
             case (5):{
-                imageId[5] = R.drawable.apple;
-                imageId[0] = R.drawable.bananas;
-                imageId[1] = R.drawable.carrot;
-                imageId[6] = R.drawable.cherries;
-                imageId[2] = R.drawable.grapes;
-                imageId[7] = R.drawable.lemon;
-                imageId[3] = R.drawable.pear;
-                imageId[8] = R.drawable.strawberry;
-                imageId[4] = R.drawable.tomato;
-                imageId[9] = R.drawable.watermelon;
+                imageId[5] = itemes.IDItems[0];
+                imageId[0] = itemes.IDItems[1];
+                imageId[1] = itemes.IDItems[2];
+                imageId[6] = itemes.IDItems[3];
+                imageId[2] = itemes.IDItems[4];
+                imageId[7] = itemes.IDItems[5];
+                imageId[3] = itemes.IDItems[6];
+                imageId[8] = itemes.IDItems[7];
+                imageId[4] = itemes.IDItems[8];
+                imageId[9] = itemes.IDItems[9];
 
-                imageId_bg[5] = R.drawable.apple_bg;
-                imageId_bg[0] = R.drawable.bananas_bg;
-                imageId_bg[1] = R.drawable.carrot_bg;
-                imageId_bg[6] = R.drawable.cherries_bg;
-                imageId_bg[2] = R.drawable.grapes_bg;
-                imageId_bg[7] = R.drawable.lemon_bg;
-                imageId_bg[3] = R.drawable.pear_bg;
-                imageId_bg[8] = R.drawable.strawberry_bg;
-                imageId_bg[4] = R.drawable.tomato_bg;
-                imageId_bg[9] = R.drawable.watermelon_bg;
+                imageId_bg[5] = itemes.IDItems_bg[0];
+                imageId_bg[0] = itemes.IDItems_bg[1];
+                imageId_bg[1] = itemes.IDItems_bg[2];
+                imageId_bg[6] = itemes.IDItems_bg[3];
+                imageId_bg[2] = itemes.IDItems_bg[4];
+                imageId_bg[7] = itemes.IDItems_bg[5];
+                imageId_bg[3] = itemes.IDItems_bg[6];
+                imageId_bg[8] = itemes.IDItems_bg[7];
+                imageId_bg[4] = itemes.IDItems_bg[8];
+                imageId_bg[9] = itemes.IDItems_bg[9];
                 break;
             }
 
@@ -459,44 +475,44 @@ public class DragDropActivity extends AppCompatActivity {
             Log.d(TAG,String.valueOf(view.getId()));
 
             if (view.getId() == img1.getId()){
-                dragimg_id = R.drawable.apple;
-                frunto = getString(R.string.manzana);
+                dragimg_id = itemes.IDItems[0];
+                frunto = getString(itemes.IDSounds[0]);
             }
             if (view.getId() == img2.getId() ){
-                dragimg_id = R.drawable.bananas;
-                frunto = getString(R.string.platano);
+                dragimg_id = itemes.IDItems[1];
+                frunto = getString(itemes.IDSounds[1]);
             }
             if (view.getId() == img3.getId() ){
-                dragimg_id = R.drawable.carrot;
-                frunto = getString(R.string.zanahoria);
+                dragimg_id = itemes.IDItems[2];
+                frunto = getString(itemes.IDSounds[2]);
             }
             if (view.getId() == img4.getId() ){
-                dragimg_id = R.drawable.cherries;
-                frunto = getString(R.string.cereza);
+                dragimg_id = itemes.IDItems[3];
+                frunto = getString(itemes.IDSounds[3]);
             }
             if (view.getId() == img5.getId() ){
-                dragimg_id = R.drawable.lemon;
-                frunto = getString(R.string.limon);
+                dragimg_id = itemes.IDItems[4];
+                frunto = getString(itemes.IDSounds[4]);
             }
             if (view.getId() == img6.getId() ){
-                dragimg_id = R.drawable.grapes;
-                frunto = getString(R.string.uva);
+                dragimg_id = itemes.IDItems[5];
+                frunto = getString(itemes.IDSounds[5]);
             }
             if (view.getId() == img7.getId() ){
-                dragimg_id = R.drawable.pear;
-                frunto = getString(R.string.pera);
+                dragimg_id = itemes.IDItems[6];
+                frunto = getString(itemes.IDSounds[6]);
             }
             if (view.getId() == img8.getId() ){
-                dragimg_id = R.drawable.strawberry;
-                frunto = getString(R.string.fresa);
+                dragimg_id = itemes.IDItems[7];
+                frunto = getString(itemes.IDSounds[7]);
             }
             if ( view.getId() == img9.getId() ){
-                dragimg_id = R.drawable.tomato;
-                frunto = getString(R.string.tomate);
+                dragimg_id = itemes.IDItems[8];
+                frunto = getString(itemes.IDSounds[8]);
             }
             if (view.getId() == img10.getId() ){
-                dragimg_id = R.drawable.watermelon;
-                frunto = getString(R.string.sandia);
+                dragimg_id = itemes.IDItems[9];
+                frunto = getString(itemes.IDSounds[9]);
             }
 
             return false;

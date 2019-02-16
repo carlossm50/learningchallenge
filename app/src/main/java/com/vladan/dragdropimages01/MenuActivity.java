@@ -28,7 +28,7 @@ TextToSpeech tts;
                         Log.e("TTS","lenguaje no soportado");
                     }
                     else {
-                        SpeackOut();//Agreagar al click de un Button
+                       //  SpeackOut();//Agreagar al click de un Button
                     }
                 }
                 else{
