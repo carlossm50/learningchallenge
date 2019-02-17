@@ -1,12 +1,11 @@
 package com.vladan.dragdropimages01;
 
+
 import android.content.ClipData;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-//import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,10 +17,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.Locale;
 import java.util.Random;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.FragmentManager;
+
 public class DragDropActivity extends AppCompatActivity {
 
     public static final String TAG = "drag_drop";
@@ -276,6 +276,24 @@ public class DragDropActivity extends AppCompatActivity {
     public void end_sounds(){
         back_sund.stop();
         end_sound.start();
+
+        FragmentManager manager = getSupportFragmentManager();
+        dialigopuntaje dialogo = new dialigopuntaje();
+        dialogo.setpuntos(puntaje_int * 10);
+        dialogo.show(manager,"Puntaje");
+
+        /*LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.puntaje_layout,(ViewGroup) findViewById(R.id.fgmpuntaje));
+        AlertDialog.Builder builder = new AlertDialog.Builder(DragDropActivity.this);
+        builder.setView(layout);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create();
+        builder.show();*/
     }
 
     // Genera la proxima imagen a seleccionar
