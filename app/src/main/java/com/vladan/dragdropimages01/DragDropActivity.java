@@ -2,6 +2,7 @@ package com.vladan.dragdropimages01;
 
 
 import android.content.ClipData;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,16 +22,16 @@ import java.util.Locale;
 import java.util.Random;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.FragmentManager;
-
+import android.os.Vibrator;
 public class DragDropActivity extends AppCompatActivity {
-
     public static final String TAG = "drag_drop";
     ImageView dropZone;
     int[] imageId = new int[10];
     int[] imageId_bg = new int[10];
+    int[] objetsSound = new int[10];
     int dropZone_imgID, drop_imgID,puntaje_int = 0,puntaje_incorecto = 0;
     TextView puntaje,puntajeincorrecto;
-    MediaPlayer img_correct,img_change, back_sund,end_sound;
+    MediaPlayer img_correct,img_change, back_sund,end_sound,incorrect_sound;
     playbackground bgsond;
     Handler mhandler = new Handler();
     int PunteroIMG = 1;
@@ -41,6 +42,7 @@ public class DragDropActivity extends AppCompatActivity {
     Bundle opcion ;
     String op ;
     controller itemes;
+    private Vibrator vibrator ;
 
     ImageView img1,img2,img3,img4,img5,img6,img7,img8,img9,img10;
 
@@ -60,6 +62,7 @@ public class DragDropActivity extends AppCompatActivity {
             }
             case R.id.refresh:{
                 reiniciar();
+                SpeackOut();
                 break;
             }
         }
@@ -76,7 +79,6 @@ public class DragDropActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         //Toast.makeText(this,"Start",Toast.LENGTH_SHORT).show();
-
         super.onStart();
     }
 
@@ -105,6 +107,7 @@ public class DragDropActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         //Toast.makeText(this,"Resume",Toast.LENGTH_SHORT).show();
+
         super.onResume();
     }
 
@@ -112,6 +115,7 @@ public class DragDropActivity extends AppCompatActivity {
     protected void onRestart() {
             begin_sounds();
 //        Toast.makeText(this,"Restart",Toast.LENGTH_SHORT).show();
+
         super.onRestart();
     }
 
@@ -119,7 +123,7 @@ public class DragDropActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drag_drop);
-
+        vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -132,6 +136,7 @@ public class DragDropActivity extends AppCompatActivity {
         });
          opcion = getIntent().getExtras();
          op = opcion.getString("opcion");
+
          itemes = new controller(op);
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -165,8 +170,6 @@ public class DragDropActivity extends AppCompatActivity {
         img9 = (ImageView) findViewById(R.id.imageView9);
         img10 = (ImageView) findViewById(R.id.imageView10);
 
-
-
         img1.setOnTouchListener(new ChoiceTouchListener());
         img2.setOnTouchListener(new ChoiceTouchListener());
         img3.setOnTouchListener(new ChoiceTouchListener());
@@ -177,12 +180,17 @@ public class DragDropActivity extends AppCompatActivity {
         img8.setOnTouchListener(new ChoiceTouchListener());
         img9.setOnTouchListener(new ChoiceTouchListener());
         img10.setOnTouchListener(new ChoiceTouchListener());
+
         llenarimagenes();//LLena los componentes imageview con las imagenes correspondientes
+
         llenararreglo();//Llena el el arreglo de imagenes en diferente orden.
 
         dropZone = (ImageView) findViewById(R.id.drop);
-        nextimg();
+
         begin_sounds(); //Iniciar el sonido de backGround
+
+        nextimg();//Asigna la siguiente imagen a mostrar.
+        SpeackOut();
         dropZone.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
@@ -195,14 +203,14 @@ public class DragDropActivity extends AppCompatActivity {
                                 dropZone.setImageResource(dragimg_id);
                                 puntaje_int = puntaje_int + 1;
                                 puntaje.setText(String.valueOf(puntaje_int));
-                                //img_correct.start();
+                                img_correct.start();
 
                                 mhandler.postDelayed(new Runnable() {
                                    // int x = 0;
 
                                     @Override
                                     public void run() {
-                                        SpeackOut();//Agreagar al click de un Button
+                                        //SpeackOut();//Agreagar al click de un Button
                                         dropZone.setImageResource(R.drawable.correct_green);
                                         intAletorio ++;
                                     }
@@ -214,6 +222,7 @@ public class DragDropActivity extends AppCompatActivity {
                                         PunteroIMG++;
                                         if (PunteroIMG <= 10) {
                                             nextimg();
+                                            SpeackOut();
                                             img_change.start();
                                         } else {
                                             end_sounds(); //sonido final
@@ -228,6 +237,8 @@ public class DragDropActivity extends AppCompatActivity {
                                 dropZone.setImageResource(R.drawable.wrong_red);
                                 puntaje_incorecto = puntaje_incorecto + 1;
                                 puntajeincorrecto.setText(String.valueOf(puntaje_incorecto));
+                                incorrect_sound.start(); //Sonido de respuesta incorrecta.
+                                vibrar();               // Vibra el telefono si selecciona la respuesta incorrecta.
                                 mhandler.postDelayed(new Runnable() {
                                     //int x = 0;
 
@@ -238,6 +249,7 @@ public class DragDropActivity extends AppCompatActivity {
                                         intAletorio ++;
                                         if (PunteroIMG <= 10){
                                             nextimg();
+                                            SpeackOut();
                                         }
                                         else {
                                             end_sounds();
@@ -254,6 +266,17 @@ public class DragDropActivity extends AppCompatActivity {
             }
         });
     }
+
+    //Hacer que el telefono vibre
+    public void vibrar(){
+        if(vibrator.hasVibrator()){
+            vibrator.vibrate(500);
+        }
+        else{
+            Log.e("VIBRATOR", "Este dispositivo NO puede vibrar");
+        }
+    }
+
     //Reproduse el sonido de las frutas
     private void  SpeackOut(){
         String text = frunto;
@@ -266,6 +289,7 @@ public class DragDropActivity extends AppCompatActivity {
         img_change = MediaPlayer.create (this,R.raw.mario_bros_jump);
         back_sund= MediaPlayer.create (this,R.raw.angry_birds_videojuegos);
         end_sound = MediaPlayer.create (this,R.raw.win);
+        incorrect_sound = MediaPlayer.create (this,R.raw.incorrect_sound);
 
         bgsond = new playbackground(back_sund);
         if (PunteroIMG <=10)
@@ -301,6 +325,7 @@ public class DragDropActivity extends AppCompatActivity {
         dropZone.setImageResource(imageId_bg[intAletorio]);
         dropZone_imgID = imageId_bg[intAletorio];
         drop_imgID = imageId[intAletorio];
+        frunto = getString(objetsSound[intAletorio]);
     }
     public void llenarimagenes(){
         img1.setImageResource(itemes.IDItems[0]);
@@ -342,6 +367,17 @@ public class DragDropActivity extends AppCompatActivity {
                 imageId_bg[8] = itemes.IDItems_bg[8];
                 imageId_bg[9] = itemes.IDItems_bg[9];
 
+                objetsSound[0] = itemes.IDSounds[0];
+                objetsSound[1] = itemes.IDSounds[1];
+                objetsSound[2] = itemes.IDSounds[2];
+                objetsSound[3] = itemes.IDSounds[3];
+                objetsSound[4] = itemes.IDSounds[4];
+                objetsSound[5] = itemes.IDSounds[5];
+                objetsSound[6] = itemes.IDSounds[6];
+                objetsSound[7] = itemes.IDSounds[7];
+                objetsSound[8] = itemes.IDSounds[8];
+                objetsSound[9] = itemes.IDSounds[9];
+
                 break;
             }
             case (1):{
@@ -366,6 +402,18 @@ public class DragDropActivity extends AppCompatActivity {
                 imageId_bg[9] = itemes.IDItems_bg[7];
                 imageId_bg[3] = itemes.IDItems_bg[8];
                 imageId_bg[7] = itemes.IDItems_bg[9];
+
+                objetsSound[4] = itemes.IDSounds[0];
+                objetsSound[8] = itemes.IDSounds[1];
+                objetsSound[2] = itemes.IDSounds[2];
+                objetsSound[6] = itemes.IDSounds[3];
+                objetsSound[0] = itemes.IDSounds[4];
+                objetsSound[1] = itemes.IDSounds[5];
+                objetsSound[5] = itemes.IDSounds[6];
+                objetsSound[9] = itemes.IDSounds[7];
+                objetsSound[3] = itemes.IDSounds[8];
+                objetsSound[7] = itemes.IDSounds[9];
+
                 break;
             }
             case (2):{
@@ -390,6 +438,18 @@ public class DragDropActivity extends AppCompatActivity {
                 imageId_bg[2] = itemes.IDItems_bg[7];
                 imageId_bg[1] = itemes.IDItems_bg[8];
                 imageId_bg[0] = itemes.IDItems_bg[9];
+
+                objetsSound[9] = itemes.IDSounds[0];
+                objetsSound[8] = itemes.IDSounds[1];
+                objetsSound[7] = itemes.IDSounds[2];
+                objetsSound[6] = itemes.IDSounds[3];
+                objetsSound[5] = itemes.IDSounds[4];
+                objetsSound[4] = itemes.IDSounds[5];
+                objetsSound[3] = itemes.IDSounds[6];
+                objetsSound[2] = itemes.IDSounds[7];
+                objetsSound[1] = itemes.IDSounds[8];
+                objetsSound[0] = itemes.IDSounds[9];
+
                 break;
             }
             case (3):{
@@ -414,6 +474,18 @@ public class DragDropActivity extends AppCompatActivity {
                 imageId_bg[7] = itemes.IDItems_bg[7];
                 imageId_bg[9] = itemes.IDItems_bg[8];
                 imageId_bg[1] = itemes.IDItems_bg[9];
+
+                objetsSound[2] = itemes.IDSounds[0];
+                objetsSound[4] = itemes.IDSounds[1];
+                objetsSound[6] = itemes.IDSounds[2];
+                objetsSound[8] = itemes.IDSounds[3];
+                objetsSound[0] = itemes.IDSounds[4];
+                objetsSound[3] = itemes.IDSounds[5];
+                objetsSound[5] = itemes.IDSounds[6];
+                objetsSound[7] = itemes.IDSounds[7];
+                objetsSound[9] = itemes.IDSounds[8];
+                objetsSound[1] = itemes.IDSounds[9];
+
                 break;
             }
             case (4):{
@@ -438,6 +510,18 @@ public class DragDropActivity extends AppCompatActivity {
                 imageId_bg[4] = itemes.IDItems_bg[7];
                 imageId_bg[7] = itemes.IDItems_bg[8];
                 imageId_bg[0] = itemes.IDItems_bg[9];
+
+                objetsSound[3] = itemes.IDSounds[0];
+                objetsSound[6] = itemes.IDSounds[1];
+                objetsSound[9] = itemes.IDSounds[2];
+                objetsSound[2] = itemes.IDSounds[3];
+                objetsSound[5] = itemes.IDSounds[4];
+                objetsSound[8] = itemes.IDSounds[5];
+                objetsSound[1] = itemes.IDSounds[6];
+                objetsSound[4] = itemes.IDSounds[7];
+                objetsSound[7] = itemes.IDSounds[8];
+                objetsSound[0] = itemes.IDSounds[9];
+
                 break;
             }
             case (5):{
@@ -462,6 +546,18 @@ public class DragDropActivity extends AppCompatActivity {
                 imageId_bg[8] = itemes.IDItems_bg[7];
                 imageId_bg[4] = itemes.IDItems_bg[8];
                 imageId_bg[9] = itemes.IDItems_bg[9];
+
+                objetsSound[5] = itemes.IDSounds[0];
+                objetsSound[0] = itemes.IDSounds[1];
+                objetsSound[1] = itemes.IDSounds[2];
+                objetsSound[6] = itemes.IDSounds[3];
+                objetsSound[2] = itemes.IDSounds[4];
+                objetsSound[7] = itemes.IDSounds[5];
+                objetsSound[3] = itemes.IDSounds[6];
+                objetsSound[8] = itemes.IDSounds[7];
+                objetsSound[4] = itemes.IDSounds[8];
+                objetsSound[9] = itemes.IDSounds[9];
+
                 break;
             }
 
@@ -493,7 +589,7 @@ public class DragDropActivity extends AppCompatActivity {
         }
         @Override
         protected Boolean doInBackground(Void... voids) {
-                back_sund.start();
+               // back_sund.start();
             return true;
         }
     }
@@ -507,47 +603,46 @@ public class DragDropActivity extends AppCompatActivity {
 
             if (view.getId() == img1.getId()){
                 dragimg_id = itemes.IDItems[0];
-                frunto = getString(itemes.IDSounds[0]);
+                //frunto = getString(itemes.IDSounds[0]);
             }
             if (view.getId() == img2.getId() ){
                 dragimg_id = itemes.IDItems[1];
-                frunto = getString(itemes.IDSounds[1]);
+                //frunto = getString(itemes.IDSounds[1]);
             }
             if (view.getId() == img3.getId() ){
                 dragimg_id = itemes.IDItems[2];
-                frunto = getString(itemes.IDSounds[2]);
+                //frunto = getString(itemes.IDSounds[2]);
             }
             if (view.getId() == img4.getId() ){
                 dragimg_id = itemes.IDItems[3];
-                frunto = getString(itemes.IDSounds[3]);
+                //frunto = getString(itemes.IDSounds[3]);
             }
             if (view.getId() == img5.getId() ){
                 dragimg_id = itemes.IDItems[4];
-                frunto = getString(itemes.IDSounds[4]);
+                //frunto = getString(itemes.IDSounds[4]);
             }
             if (view.getId() == img6.getId() ){
                 dragimg_id = itemes.IDItems[5];
-                frunto = getString(itemes.IDSounds[5]);
+                //frunto = getString(itemes.IDSounds[5]);
             }
             if (view.getId() == img7.getId() ){
                 dragimg_id = itemes.IDItems[6];
-                frunto = getString(itemes.IDSounds[6]);
+                //frunto = getString(itemes.IDSounds[6]);
             }
             if (view.getId() == img8.getId() ){
                 dragimg_id = itemes.IDItems[7];
-                frunto = getString(itemes.IDSounds[7]);
+                //frunto = getString(itemes.IDSounds[7]);
             }
             if ( view.getId() == img9.getId() ){
                 dragimg_id = itemes.IDItems[8];
-                frunto = getString(itemes.IDSounds[8]);
+                //frunto = getString(itemes.IDSounds[8]);
             }
             if (view.getId() == img10.getId() ){
                 dragimg_id = itemes.IDItems[9];
-                frunto = getString(itemes.IDSounds[9]);
+                //frunto = getString(itemes.IDSounds[9]);
             }
 
             return false;
         }
     }
-
 }

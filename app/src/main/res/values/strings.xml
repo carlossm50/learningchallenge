@@ -26,12 +26,12 @@
     <string name="seis">Seis</string>
     <string name="siete">Siete</string>
     <string name="ocho">Ocho</string>
-    <string name="nueve">Nuevo</string>
+    <string name="nueve">Nueve</string>
     <string name="dies">Dies</string>
-    <string name="circulo">Circulo</string>
+    <string name="circulo">Círculo</string>
     <string name="diamante">Diamante</string>
     <string name="hexagono">Hexágono</string>
-    <string name="pentegono">Pentagono</string>
+    <string name="pentegono">Pentágono</string>
     <string name="rectangulo">Rectángulo</string>
     <string name="ovalo">Óvalo</string>
     <string name="cuadrado">Cuadrado</string>
